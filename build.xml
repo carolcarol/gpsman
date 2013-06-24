@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<project name="messenger" default="build" basedir=".">
+	<property environment="env" />
+	<import file="${env.RELEASE_HOME}/build_generic.xml" />
+
+	<target name="setup.product">
+		<loadfile property="product" srcFile="${basedir}/product" failonerror="true" />
+	</target>
+
+	<target name="setup" depends="build.generic.setup">
+		<echo>Platform: [${plat}]</echo>
+		<echo>Product:  [${product}]</echo>
+		<echo>Release:  [${release.tag}]</echo>
+	</target>
+
+	<target name="init" depends="setup,record">
+		<echo>Target platform: ${os.name} ${os.arch} ${os.version}</echo>
+	</target>
+
+	<target name="antcall">
+		<ant dir="core" target="${target}" />
+
+	</target>
+
+	<target name="build" depends="init">
+		<antcall target="antcall">
+			<param name="target" value="build" />
+		</antcall>
+	</target>
+	
+	<target name="run.unittest" depends="init">
+			<antcall target="antcall">
+				<param name="target" value="run.unittest" />
+			</antcall>
+		</target>
+
+	<target name="all" depends="build" />
+
+	<!-- javadoc -->
+	<target name="javadoc" depends="init">
+		<javadoc destdir="${basedir}/javadoc" maxmemory="256m">
+			<fileset dir="${basedir}">
+				<include name="**/src/**/*.java" />
+			</fileset>
+		</javadoc>
+	</target>
+
+	<!-- javadoc package -->
+	<target name="javadoc_pkg" depends="init">
+
+	</target>
+
+	<target name="local.release.copy" depends="init">
+		<antcall target="antcall">
+			<param name="target" value="release.copy" />
+		</antcall>
+	</target>
+
+	<target name="release.modules" depends="init">
+		<antcall target="antcall">
+			<param name="target" value="release" />
+		</antcall>
+	</target>
+
+	<target name="generate.version.info" depends="init">
+		<exec executable="${env.SCMTOOLS}/vers.sh" />
+		<exec executable="${env.SCMTOOLS}/file_version.sh" />
+	</target>
+
+	<!-- release -->
+	<target name="release" depends="release.modules, generate.version.info, javadoc_pkg">
+		<exec executable="cp">
+			<arg line="-rp javadoc ${reldir}/" />
+		</exec>
+		<exec executable="cp">
+			<arg line="-rp javadoc_pkg ${reldir}/" />
+		</exec>
+		<exec executable="cp">
+			<arg line="-rp doc ${reldir}/" />
+		</exec>
+		<exec executable="cp">
+			<arg line="-rp doc_internal ${reldir}/" />
+		</exec>
+		<copy todir="${reldir}/${plat}" flatten="yes" failonerror="true">
+			<fileset dir="${basedir}/${plat}">
+				<include name="release_version_info" />
+			</fileset>
+		</copy>
+		<exec executable="cp">
+			<arg line="-rp file_version ${reldir}/" />
+		</exec>
+		<copy file="file_list" todir="${reldir}/" />
+
+	</target>
+
+	<target name="clean" depends="init">
+		<antcall target="antcall">
+			<param name="target" value="clean" />
+		</antcall>
+	</target>
+</project>
