@@ -31,7 +31,7 @@ public class CarolGPSDataParser implements GpsDataParser {
 		return latitudeLongitude;
 	}
 
-	public String parseIMSI (String gpsData) {
+	public String parseIMEI (String gpsData) {
 		return gpsData.substring (7, 22);
 	}
 	

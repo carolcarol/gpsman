@@ -4,7 +4,7 @@ import com.gpsman.parsers.CarolGPSDataParser;
 import com.gpsman.parsers.GpsDataParser;
 import com.gpsman.persisters.LocationDataPersister;
 import com.gpsman.persisters.StdOutPersister;
-import com.gpsman.resolvers.Imsi2MsisdnResolver;
+import com.gpsman.resolvers.Imei2MsisdnResolver;
 import com.gpsman.resolvers.StaticMsisdnResolver;
 
 public class GpsManager {
@@ -13,7 +13,7 @@ public class GpsManager {
 
 	public static final String XGPS = "XGPS";
 
-	private Imsi2MsisdnResolver msisdnResolver = new StaticMsisdnResolver ();
+	private Imei2MsisdnResolver msisdnResolver = new StaticMsisdnResolver ();
 	
 	private GpsDataParser parser = new CarolGPSDataParser ();
 	
@@ -26,9 +26,9 @@ public class GpsManager {
 		
 		if(gpsData != null) {
 			if ( gpsData.contains (XGPS) ) {
-				String imsi = parser.parseIMSI(gpsData);
+				String imsi = parser.parseIMEI(gpsData);
 				
-				String msisdn = msisdnResolver.getMsisdnForImsi (imsi);
+				String msisdn = msisdnResolver.getMsisdnForImei (imsi);
 				Double[] latlon = parser.parseCoordinates (gpsData);
 				persister.persistLocationData (msisdn, latlon);
 				
