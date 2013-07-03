@@ -8,6 +8,6 @@ public interface GpsDataParser {
 
 	public abstract Double[] parseCoordinates (String gpsData);
 
-	public abstract String parseIMSI (String gpsData);
+	public abstract String parseIMEI (String gpsData);
 
 }
