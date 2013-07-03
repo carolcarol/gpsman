@@ -3,7 +3,7 @@ package com.gpsman.listener;
 import com.gpsman.parsers.CarolGPSDataParser;
 import com.gpsman.parsers.GpsDataParser;
 import com.gpsman.persisters.LocationDataPersister;
-import com.gpsman.persisters.MemcachePersister;
+import com.gpsman.persisters.StdOutPersister;
 import com.gpsman.resolvers.Imsi2MsisdnResolver;
 import com.gpsman.resolvers.StaticMsisdnResolver;
 
@@ -17,12 +17,13 @@ public class GpsManager {
 	
 	private GpsDataParser parser = new CarolGPSDataParser ();
 	
-	private LocationDataPersister persister = new MemcachePersister (); //new StdOutPersister(); 
+	private LocationDataPersister persister = new StdOutPersister(); // new MemcachePersister (); 
 
 	public GpsManager () {
 	}
 
 	public String processGpsData (String gpsData) {
+		
 		if(gpsData != null) {
 			if ( gpsData.contains (XGPS) ) {
 				String imsi = parser.parseIMSI(gpsData);
@@ -32,8 +33,9 @@ public class GpsManager {
 				persister.persistLocationData (msisdn, latlon);
 				
 			}
+			return prepareAckResponse (gpsData);
 		}
-		return prepareAckResponse (gpsData);
+		return null;
 	}
 
 	private String prepareAckResponse (String gpsData) {
