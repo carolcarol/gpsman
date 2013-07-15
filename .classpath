@@ -3,5 +3,23 @@
 	<classpathentry kind="src" path="core/java/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/release/external/spymemcached/2.7/lib/spymemcached-2.7.jar"/>
+	<classpathentry kind="lib" path="/release/canvas/lcgw/lcgw_1_0_0_24/lib/xmlwsadapter.jar"/>
+	<classpathentry kind="lib" path="/release/canvas/lcgw/lcgw_1_0_0_24/lib/lcgw_util.jar"/>
+	<classpathentry kind="lib" path="/release/canvas/lcgw/lcgw_1_0_0_24/lib/lcgw_tracking.jar"/>
+	<classpathentry kind="lib" path="/release/canvas/lcgw/lcgw_1_0_0_24/lib/lcgw_tracedef.jar"/>
+	<classpathentry kind="lib" path="/release/canvas/lcgw/lcgw_1_0_0_24/lib/lcgw-testfwk.jar"/>
+	<classpathentry kind="lib" path="/release/canvas/lcgw/lcgw_1_0_0_24/lib/lcgw_rgeocoding.jar"/>
+	<classpathentry kind="lib" path="/release/canvas/lcgw/lcgw_1_0_0_24/lib/lcgw_provisioning.jar"/>
+	<classpathentry kind="lib" path="/release/canvas/lcgw/lcgw_1_0_0_24/lib/lcgw_parlayx.jar"/>
+	<classpathentry kind="lib" path="/release/canvas/lcgw/lcgw_1_0_0_24/lib/lcgw_mlpapi.jar"/>
+	<classpathentry kind="lib" path="/release/canvas/lcgw/lcgw_1_0_0_24/lib/lcgw_locprovider.jar"/>
+	<classpathentry kind="lib" path="/release/canvas/lcgw/lcgw_1_0_0_24/lib/lcgw_ioc.jar"/>
+	<classpathentry kind="lib" path="/release/canvas/lcgw/lcgw_1_0_0_24/lib/lcgw_info.jar"/>
+	<classpathentry kind="lib" path="/release/canvas/lcgw/lcgw_1_0_0_24/lib/lcgw_hlr_gateway.jar"/>
+	<classpathentry kind="lib" path="/release/canvas/lcgw/lcgw_1_0_0_24/lib/lcgwgui.jar"/>
+	<classpathentry kind="lib" path="/release/canvas/lcgw/lcgw_1_0_0_24/lib/lcgw_event.jar"/>
+	<classpathentry kind="lib" path="/release/canvas/lcgw/lcgw_1_0_0_24/lib/lcgw_charging.jar"/>
+	<classpathentry kind="lib" path="/release/canvas/lcgw/lcgw_1_0_0_24/lib/lcgw_adapters.jar"/>
+	<classpathentry kind="lib" path="Extasys.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

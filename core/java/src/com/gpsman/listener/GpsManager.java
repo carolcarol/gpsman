@@ -3,7 +3,7 @@ package com.gpsman.listener;
 import com.gpsman.parsers.CarolGPSDataParser;
 import com.gpsman.parsers.GpsDataParser;
 import com.gpsman.persisters.LocationDataPersister;
-import com.gpsman.persisters.StdOutPersister;
+import com.gpsman.persisters.MemcachePersister;
 import com.gpsman.resolvers.Imei2MsisdnResolver;
 import com.gpsman.resolvers.StaticMsisdnResolver;
 
@@ -16,8 +16,8 @@ public class GpsManager {
 	private Imei2MsisdnResolver msisdnResolver = new StaticMsisdnResolver ();
 	
 	private GpsDataParser parser = new CarolGPSDataParser ();
-	
-	private LocationDataPersister persister = new StdOutPersister(); // new MemcachePersister (); 
+
+	private LocationDataPersister persister = new MemcachePersister ();
 
 	public GpsManager () {
 	}

@@ -1,6 +1,7 @@
 package com.gpsman.persisters;
 
 import java.io.IOException;
+import java.util.Date;
 
 import com.telenity.canvas.lcgw.locprovider.LocationResult;
 
@@ -33,8 +34,13 @@ public class MemcachePersister implements LocationDataPersister {
 		
 		locationResult.setLatitude (latLon[0]);
 		locationResult.setLongitude (latLon[1]);
-		
-		memcacheClient.set (msisdn, 500, locationResult);
+		try {
+			locationResult.setTimestamp (new Date ());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		memcacheClient.set (msisdn, 90, locationResult);
 		
 		System.out.println ("Location set on memcache " + msisdn + "  latitude=" + latLon[0] + " longitude=" + latLon[1]);
 	}

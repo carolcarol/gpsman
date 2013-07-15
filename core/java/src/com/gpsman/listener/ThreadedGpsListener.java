@@ -5,18 +5,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ThreadedGpsListener {
-	public static final String __file_identity = "@(#)$Id:  ThreadedGpsListener.java,v 1.1 Jun 25, 2013 2:44:19 PM gokhang Exp $";
+
+//	public static void main (String args[]) throws Exception {
+//		int port = 2013;
+//		int connectionsTimeout = (15 * 60 * 1000);
+//		int corePoolSize = 5;
+//		int maxPoolSize = 15;
+//
+//		TCPServer fTCPServer =
+//			new TCPServer ("My TCP server", "Example", InetAddress.getByName ("10.34.39.123"), port,
+//				100, connectionsTimeout, corePoolSize, maxPoolSize, new GpsManager ());
+//
+//		fTCPServer.Start ();
+//
+//		System.out.format ("***** MINI KAREL-ATU LISTENER STARTED port:%d **** \n", port);
+//	}
 
 	public static final int THREAD_COUNT = 3;
 
-	public static void main (String args[]) throws Exception
-
-	{
+	public static void main (String args[]) throws Exception	{
 
 		int port = 2013;
 		ServerSocket welcomeSocket = new ServerSocket (port);
-		List<ListenerThread> listeners = new ArrayList<ListenerThread> (); 
-		
+		List<ListenerThread> listeners = new ArrayList<ListenerThread> ();
+
 		for (int i = 0; i < THREAD_COUNT; i++) {
 			GpsManager gpsManager = new GpsManager ();
 			ListenerThread listener = new ListenerThread (welcomeSocket, gpsManager);
@@ -24,9 +36,9 @@ public class ThreadedGpsListener {
 			Thread listenerThread = new Thread (listener);
 			listenerThread.start ();
 		}
-		
-		System.out.format ("***** MINI KAREL-ATU LISTENER STARTED port:%d **** \n", port);
-		
-	}
 
+		System.out.format ("***** MINI KAREL-ATU LISTENER STARTED port:%d **** \n", port);
+
+	}
+	
 }
